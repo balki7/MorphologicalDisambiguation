@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.balki</groupId>
+    <artifactId>morphological-disambiguation</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <zemberek.version>0.11.1</zemberek.version>
+        <log4j.version>2.8.2</log4j.version>
+        <deeplearning4j.version>1.0.0-alpha</deeplearning4j.version>
+        <nd4j.version>1.0.0-alpha</nd4j.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>zemberek-nlp</groupId>
+            <artifactId>core</artifactId>
+            <version>${zemberek.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>zemberek-nlp</groupId>
+            <artifactId>tokenization</artifactId>
+            <version>${zemberek.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>zemberek-nlp</groupId>
+            <artifactId>morphology</artifactId>
+            <version>${zemberek.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>zemberek-nlp</groupId>
+            <artifactId>normalization</artifactId>
+            <version>${zemberek.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.deeplearning4j</groupId>
+		    <artifactId>deeplearning4j-core</artifactId>
+		    <version>${deeplearning4j.version}</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.deeplearning4j</groupId>
+		    <artifactId>deeplearning4j-nlp</artifactId>
+		    <version>${deeplearning4j.version}</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.nd4j</groupId>
+		    <artifactId>nd4j-native-platform</artifactId>
+		    <version>${nd4j.version}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>ahmetaa-repo</id>
+            <name>ahmetaa Maven Repo on Github</name>
+            <url>https://raw.github.com/ahmetaa/maven-repo/master</url>
+        </repository>
+    </repositories>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
