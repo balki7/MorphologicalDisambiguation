@@ -32,8 +32,8 @@ public class AppGUI extends JFrame {
 
 	public AppGUI() {
 		setTitle("Morphological Disambiguation");
-		setSize(500, 500);
-		setLocation(new Point(500, 500));
+		setSize(700, 700);
+		setLocation(new Point(200, 200));
 		setLayout(new GridLayout(2, 1));
 		setResizable(false);
 

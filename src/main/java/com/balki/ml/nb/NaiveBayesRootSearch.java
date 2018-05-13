@@ -33,17 +33,17 @@ public class NaiveBayesRootSearch {
         List<String> lines = readFile();
         for(String line : lines){
             String[] detail = line.split(",");
-            bayes.learn(detail[1], Arrays.asList(detail[0]));
+            bayes.learn(detail[1], Arrays.asList(detail[0].toLowerCase()));
         }
         logger.info("Learn completed.");
     }
 
     public static String search(String word){
-        App.appendReport("Searching result in most used roots by NB : " + word);
+        App.appendReport("Searching result in most used IGs by NB : " + word);
         logger.debug("\n\tSearching : " + word);
-    	String result = bayes.classify(Arrays.asList(word)).getCategory();
+    	String result = bayes.classify(Arrays.asList(word.toLowerCase())).getCategory();
         logger.debug("\n\tNaive Bayes Most Used Result : " + result);
-        App.appendReport("Root result by NB : " + result);
+        App.appendReport("IG result by NB : " + result);
         return result;
     }
 

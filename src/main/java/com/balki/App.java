@@ -96,6 +96,52 @@ public class App {
 			}
 			index++;
 		}
+		
+		appendReport("Analyzing IGs");
+		Map<String, Set<String>> igsMap = Zemberek.analyzeIG(sentence);
+
+		index = 0;
+		String previousResult = null;
+		gui.appendIGResult("IG Analysis Result\n--------------------");
+		for (String word : igsMap.keySet()) {
+			appendReport("Word : " + word);
+			if (igsMap.get(word).isEmpty()) {
+				appendReport("\tNo IGs");
+				gui.appendIGResult(word + " : " + "Not Found");
+			} else if (igsMap.get(word).size() == 1) {
+				Iterator<String> igsIterator = igsMap.get(word).iterator();
+				String ig = igsIterator.next();
+				appendReport("\tIG : " + ig);
+				previousResult = ig;
+				gui.appendIGResult(word + " : " + ig);
+			} else {
+				appendReport("\tMultiple IGs : ");
+				Iterator<String> igsIterator = igsMap.get(word).iterator();
+				while (igsIterator.hasNext()) {
+					appendReport("\t\t" + igsIterator.next() + " ");
+				}
+
+				if (igsMap.keySet().size() == 1) {
+					appendReport("\tNo IGs");
+					gui.appendIGResult(word + " : " + "Not Found");
+				} else {
+					if(previousResult == null) {
+						String firstResult = igsMap.get(word).iterator().next();
+						previousResult = firstResult;
+						appendReport("\tIG : " + firstResult + "(First Result)");
+						gui.appendIGResult(word + " : " + firstResult + "(First Result)");
+					}
+					else {
+						previousResult = previousResult.replace(";", "+").replace(")(", "^DB+").replace("(", "").replace(")", "");
+						String result = NaiveBayesIGSearch.search(word, previousResult);
+						previousResult = result;
+						appendReport("\tIG : " + result);
+						gui.appendIGResult(word + " : " + result);
+					}	
+				}
+			}
+			index++;
+		}
 	}
 	
 	public static void appendReport(String text) {

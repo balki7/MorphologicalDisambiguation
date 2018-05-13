@@ -2,6 +2,7 @@ package com.balki.ml.word2vec;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.datavec.api.util.ClassPathResource;
 import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.deeplearning4j.text.sentenceiterator.BasicLineIterator;
 import org.deeplearning4j.text.sentenceiterator.SentenceIterator;
@@ -13,6 +14,7 @@ import com.balki.App;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 public class Word2VecRootSearch {
 	private static Logger logger = LogManager.getLogger(Word2VecRootSearch.class);
 
-	private static final String SINGLE_ROOTS_FILE_NAME = "/Users/balki/eclipse-workspace/MorphologicalDisambiguation/gazete-root.txt";
+	private static final String NEWS_ROOTS_FILE_NAME = "news-roots.txt";
 
 	private static Word2Vec vec;
 
@@ -76,7 +78,15 @@ public class Word2VecRootSearch {
 
 	private static List<String> readFile() {
 		List<String> lines = new ArrayList<String>();
-		try (BufferedReader br = new BufferedReader(new FileReader(SINGLE_ROOTS_FILE_NAME))) {
+        String filePath = null;
+        try {
+			filePath = new ClassPathResource(NEWS_ROOTS_FILE_NAME).getFile().getAbsolutePath();
+		} catch (FileNotFoundException e) {
+			logger.error("File read error", e);
+			return lines;
+		}
+        
+		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 			String sCurrentLine;
 			while ((sCurrentLine = br.readLine()) != null) {
 				lines.add(sCurrentLine);
